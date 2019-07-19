@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-my-assets',
   templateUrl: './my-assets.component.html',
@@ -24,8 +24,7 @@ export class MyAssetsComponent implements OnInit {
 
   ngOnInit() {
     this.type = this.route.snapshot.params.type;
-    this.reloadAssets();
-
+    //this.reloadAssets();
     const uriAssetTypes = '/api/asset/GetTypes';
 
     this.http.get<Array<AssetType>>(uriAssetTypes, this.httpOptions)
@@ -33,20 +32,23 @@ export class MyAssetsComponent implements OnInit {
         this.assetTypes = dataAssetTypes;
       });
 
-    this.router.events
-    .subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.reloadAssets();
-    }});
+    //this.router.events
+    //.subscribe((event) => {
+    //  if (event instanceof NavigationEnd) {
+    //    this.reloadAssets();
+    //}});
+
+
+    this.route.data.subscribe(data => console.log('Data :', data));
   }
 
-  reloadAssets() {
-    const uriAsset = '/api/asset/Get/' + this.route.snapshot.params.type;
-    this.http.get<Array<Asset>>(uriAsset, this.httpOptions)
-    .subscribe((dataAssets: Array<Asset>) => {
-          this.assets = dataAssets;
-      });
-  }
+  //reloadAssets() {
+  //  const uriAsset = '/api/asset/Get/' + this.route.snapshot.params.type;
+  //  this.http.get<Array<Asset>>(uriAsset, this.httpOptions)
+  //  .subscribe((dataAssets: Array<Asset>) => {
+  //        this.assets = dataAssets;
+  //    });
+  //}
 
 }
 

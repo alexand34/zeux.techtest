@@ -21,7 +21,6 @@ namespace Zeux.Test.Server.Controllers
         [HttpGet("[action]/{type}")]
         public async Task<IEnumerable<Asset>> Get(string type)
         {
-
             if (string.IsNullOrWhiteSpace(type) || type.ToLower() == "all")
                 return await _assetService.Get();
 

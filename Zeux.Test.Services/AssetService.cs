@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Zeux.Test.Models;
 using Zeux.Test.Repositories;
@@ -16,13 +17,16 @@ namespace Zeux.Test.Services
 
         public async Task<IEnumerable<Asset>> Get()
         {
-            return await _repository.Get();
+            var assets = await _repository.Get();
+            return assets.OrderBy(x=>x.Name);
         }
 
         public async Task<IEnumerable<Asset>> Get(string type)
         {
-            return await _repository.Get(type);
+            var assets = await _repository.Get(type);
+            return assets.OrderBy(x=>x.Name);
         }
+        
 
         public async Task<IEnumerable<AssetType>> GetTypes()
         {
