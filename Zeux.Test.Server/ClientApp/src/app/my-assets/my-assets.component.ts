@@ -39,7 +39,9 @@ export class MyAssetsComponent implements OnInit {
     //}});
 
 
-    this.route.data.subscribe(data => console.log('Data :', data));
+    this.route.data.subscribe(data => {
+      this.assets = data;
+    });
   }
 
   //reloadAssets() {

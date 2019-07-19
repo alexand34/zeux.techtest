@@ -31,8 +31,7 @@ export class AssetsService implements Resolve<any> {
       })
       )
     }else {
-      return EMPTY
-      //return this.assets.filter(asset => asset.type.name == route);
+      return this.assets.filter(asset => asset.type.name == route);
     }
   }
 }
